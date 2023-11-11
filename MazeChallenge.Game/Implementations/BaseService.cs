@@ -5,7 +5,7 @@ namespace MazeChallenge.Game.Implementations
 {
 	public abstract class BaseService
 	{
-		private IUnitOfWork _unitOfWork;
+		protected IUnitOfWork _unitOfWork;
 
 		public BaseService(IUnitOfWork unitOfWork)
 		{

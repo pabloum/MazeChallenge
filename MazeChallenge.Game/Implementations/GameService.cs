@@ -1,4 +1,5 @@
 ﻿using System;
+using MazeChallenge.Domain.Enums;
 using MazeChallenge.Persistence.UnitOfWork;
 
 namespace MazeChallenge.Game.Implementations
@@ -24,7 +25,7 @@ namespace MazeChallenge.Game.Implementations
 
         }
 
-        public async Task MoveNextCell(Guid mazeUuid, Guid gameUuid)
+        public async Task MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation)
         {
 
         }

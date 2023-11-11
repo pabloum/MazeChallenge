@@ -1,14 +1,12 @@
-﻿using System;
-using MazeChallenge.Domain.Entities;
-using MazeChallenge.Persistence.Contracts;
+﻿using MazeChallenge.Persistence.Contracts;
 
 namespace MazeChallenge.Persistence.UnitOfWork
 {
-	public interface IUnitOfWork
+    public interface IUnitOfWork
 	{
-        IBaseRepository<Maze> MazeRepository { get; }
-        IBaseRepository<Block> BlockRepository { get; }
-        IBaseRepository<Game> GameRepository { get; }
+        IMazeRepository MazeRepository { get; }
+        IBlockRepository BlockRepository { get; }
+        IGameRepository GameRepository { get; }
 
         Task SaveAsync();
     }

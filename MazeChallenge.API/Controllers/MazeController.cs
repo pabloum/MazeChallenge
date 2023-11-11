@@ -1,17 +1,29 @@
 ﻿using System;
+using MazeChallenge.Game.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MazeChallenge.API.Controllers
 {
 	public class MazeController : BaseController
 	{
-		public MazeController()
+        private IMazeService _mazeService;
+
+        public MazeController(IMazeService mazeService)
 		{
+            _mazeService = mazeService;
 		}
 
         [HttpPost]
-        public async Task<IActionResult> CreateMaze(int height, int width)
+        public async Task<IActionResult> CreateMaze(int height = 0, int width = 0)
         {
+            await _mazeService.CreateNewMaze(height, width);
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SeeMaze(Guid mazeUuid)
+        {
+            await _mazeService.SeeMaze(mazeUuid);
             return Ok();
         }
     }

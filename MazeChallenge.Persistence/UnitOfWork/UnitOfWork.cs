@@ -10,38 +10,38 @@ namespace MazeChallenge.Persistence.UnitOfWork
     {
         private readonly MazeDbContext _context;
         private bool _disposed = false;
-        private IBaseRepository<Maze> _mazeRepository;
-        private IBaseRepository<Block> _blockRepository;
-        private IBaseRepository<Game> _gameRepository;
+        private IMazeRepository _mazeRepository;
+        private IBlockRepository _blockRepository;
+        private IGameRepository _gameRepository;
 
         public UnitOfWork(MazeDbContext context)
         {
             _context = context;
         }
 
-        public IBaseRepository<Maze> MazeRepository
+        public IMazeRepository MazeRepository
         {
             get
             {
-                _mazeRepository ??= new BaseRepository<Maze>(_context);
+                _mazeRepository ??= new MazeRepository(_context);
                 return _mazeRepository;
             }
         }
 
-        public IBaseRepository<Block> BlockRepository
+        public IBlockRepository BlockRepository
         {
             get
             {
-                _blockRepository ??= new BaseRepository<Block>(_context);
+                _blockRepository ??= new BlockRepository(_context);
                 return _blockRepository;
             }
         }
 
-        public IBaseRepository<Game> GameRepository
+        public IGameRepository GameRepository
         {
             get
             {
-                _gameRepository ??= new BaseRepository<Game>(_context);
+                _gameRepository ??= new GameRepository(_context);
                 return _gameRepository;
             }
         }

@@ -20,20 +20,20 @@ namespace MazeChallenge.Domain.Context
         {
             modelBuilder.Entity<Maze>(entity =>
             {
-                entity.HasKey(r => r.MazeUuid);
+                entity.HasKey(r => r.Uuid);
                 entity.ToTable("Mazes");
             });
 
             modelBuilder.Entity<Block>(entity =>
             {
-                entity.HasKey(b => b.BlockUuid);
+                entity.HasKey(b => b.Uuid);
                 entity.HasOne(b => b.Maze).WithMany(m => m.Blocks).HasForeignKey(b => b.MazeUuid);
                 entity.ToTable("Blocks");
             });
 
             modelBuilder.Entity<Game>(entity =>
             {
-                entity.HasKey(r => r.GameUuid);
+                entity.HasKey(r => r.Uuid);
                 entity.ToTable("Games");
             });
         }

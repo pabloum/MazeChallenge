@@ -9,7 +9,7 @@ namespace MazeChallenge.Domain.Mappers
 		{
 			return new GameDto
 			{
-				GameUuid = game.GameUuid,
+				GameUuid = game.Uuid,
 				MazeUuid = game.MazeUuid
 			};
 		}
@@ -18,7 +18,7 @@ namespace MazeChallenge.Domain.Mappers
         {
             return new MazeDto
             {
-                MazeUuid = maze.MazeUuid
+                MazeUuid = maze.Uuid
             };
         }
     }

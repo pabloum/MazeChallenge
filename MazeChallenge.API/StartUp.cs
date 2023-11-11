@@ -25,6 +25,7 @@ namespace MazeChallenge.API
 
             services.AddBusinessServices(configRoot);
             services.AddAdditionalInterfaces();
+            services.AddDataBases(configRoot);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
