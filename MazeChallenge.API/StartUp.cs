@@ -1,4 +1,6 @@
 ﻿using System;
+using MazeChallenge.API.Installers;
+using MazeChallenge.API.Middleware;
 
 namespace MazeChallenge.API
 {
@@ -20,6 +22,10 @@ namespace MazeChallenge.API
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Hotels Reservations API", Version = "v1" });
             });
+
+
+            services.AddBusinessServices(configRoot);
+            services.InjectAdditionalInterfaces();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
@@ -35,9 +41,9 @@ namespace MazeChallenge.API
                 app.UseHttpsRedirection();
             }
 
-            app.UseCors("AllowSpecificOrigins");
-
             app.UseRouting();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.MapControllers();
 
