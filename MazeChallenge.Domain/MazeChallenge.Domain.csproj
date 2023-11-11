@@ -12,6 +12,7 @@
     <None Remove="Exceptions\" />
     <None Remove="Mappers\" />
     <None Remove="Enums\" />
+    <None Remove="Context\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -19,5 +20,10 @@
     <Folder Include="Exceptions\" />
     <Folder Include="Mappers\" />
     <Folder Include="Enums\" />
+    <Folder Include="Context\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.13" />
   </ItemGroup>
 </Project>
