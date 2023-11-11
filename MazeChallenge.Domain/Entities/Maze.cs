@@ -1,9 +1,8 @@
 ﻿using System;
 namespace MazeChallenge.Domain.Entities
 {
-	public class Maze
-	{
-        public Guid MazeUuid { get; set; }
+	public class Maze : BaseEntity
+    {
         public int Height { get; set; }
         public int Width { get; set; }
 

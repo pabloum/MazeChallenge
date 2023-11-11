@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeChallenge.API", "MazeCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeChallenge.Domain", "MazeChallenge.Domain\MazeChallenge.Domain.csproj", "{0DF663A2-4929-42F2-B2B5-E9E0075A6EC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeChallenge.Persistence", "MazeChallenge.Persistence\MazeChallenge.Persistence.csproj", "{C6011A4F-FAC4-477A-8DEB-2FC65741BB31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0DF663A2-4929-42F2-B2B5-E9E0075A6EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DF663A2-4929-42F2-B2B5-E9E0075A6EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DF663A2-4929-42F2-B2B5-E9E0075A6EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6011A4F-FAC4-477A-8DEB-2FC65741BB31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6011A4F-FAC4-477A-8DEB-2FC65741BB31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6011A4F-FAC4-477A-8DEB-2FC65741BB31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6011A4F-FAC4-477A-8DEB-2FC65741BB31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
