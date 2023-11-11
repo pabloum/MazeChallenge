@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text.Json;
 using MazeChallenge.API.Models;
+using MazeChallenge.Domain.Exceptions;
 
 namespace MazeChallenge.API.Middleware
 {

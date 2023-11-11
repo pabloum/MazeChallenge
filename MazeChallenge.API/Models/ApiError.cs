@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeChallenge.Domain.Exceptions;
+
 namespace MazeChallenge.API.Models
 {
     public class ApiError
@@ -28,43 +29,6 @@ namespace MazeChallenge.API.Models
             Details = validatioError.ValidationErrors;
         }
 
-    }
-
-
-    // Move this class to a Domain Project 
-    public class ValidationException : Exception
-    {
-        public class ValidationError
-        {
-            public string Message { get; set; }
-
-            public ValidationError(string message)
-            {
-                Message = message;
-            }
-        }
-
-        public IEnumerable<ValidationError> ValidationErrors { get; }
-
-        public ValidationException()
-        {
-            ValidationErrors = new List<ValidationError>();
-        }
-
-        public ValidationException(string message) : base(message)
-        {
-            ValidationErrors = new List<ValidationError>();
-        }
-
-        public ValidationException(string message, Exception ex) : base(message, ex)
-        {
-            ValidationErrors = new List<ValidationError>();
-        }
-
-        public ValidationException(string message, IEnumerable<string> errors) : base(message)
-        {
-            ValidationErrors = errors.Select(e => new ValidationError(e));
-        }
     }
 }
 
