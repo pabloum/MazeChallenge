@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeChallenge.API", "MazeChallenge.API\MazeChallenge.API.csproj", "{767B2177-A222-486B-ADA2-509981A0A37D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{767B2177-A222-486B-ADA2-509981A0A37D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767B2177-A222-486B-ADA2-509981A0A37D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767B2177-A222-486B-ADA2-509981A0A37D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767B2177-A222-486B-ADA2-509981A0A37D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C79085A-1A2C-44B8-ACE3-DED9AC16ADA2}
+	EndGlobalSection
+EndGlobal
