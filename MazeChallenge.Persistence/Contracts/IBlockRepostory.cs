@@ -3,7 +3,7 @@ using MazeChallenge.Domain.Entities;
 
 namespace MazeChallenge.Persistence.Contracts
 {
-	public interface IBlockRepository : IBaseRepository<Block>
+	public interface IBlockRepository : IBaseRepository<Block>, IRepository
     {
 	}
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MazeChallenge.Persistence.Implementations
 {
-	public class BaseRepository<TEntity> : IBaseRepository<TEntity>
+	public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
     where TEntity : BaseEntity
     {
         internal MazeDbContext _context;

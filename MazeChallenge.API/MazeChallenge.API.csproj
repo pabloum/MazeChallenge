@@ -26,5 +26,8 @@
     <ProjectReference Include="..\MazeChallenge.Domain\MazeChallenge.Domain.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\MazeChallenge.Game\MazeChallenge.Game.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

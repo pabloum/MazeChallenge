@@ -23,9 +23,8 @@ namespace MazeChallenge.API
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Hotels Reservations API", Version = "v1" });
             });
 
-
             services.AddBusinessServices(configRoot);
-            services.InjectAdditionalInterfaces();
+            services.AddAdditionalInterfaces();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
