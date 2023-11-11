@@ -10,9 +10,6 @@ namespace MazeChallenge.API.Controllers
 		public BaseController()
 		{
 		}
-
-		[HttpGet]
-		public async Task<IActionResult> Test() => Ok();
 	}
 }
 
