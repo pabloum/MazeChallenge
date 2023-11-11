@@ -1,5 +1,6 @@
 ﻿using MazeChallenge.Domain.DTO;
 using MazeChallenge.Domain.Entities;
+using MazeChallenge.Domain.Exceptions;
 using MazeChallenge.Persistence.UnitOfWork;
 using MazeChallenge.Domain.Mappers;
 
@@ -13,9 +14,7 @@ namespace MazeChallenge.Game.Implementations
 
         public async Task CreateNewMaze(int height, int width)
         {
-            var randomGenerator = new Random();
-            height = height != 0 ? height : randomGenerator.Next(1,25);
-            width = width != 0 ? width : randomGenerator.Next(1,25);
+            ValidateDimensions(height, width);
 
             await GenerateMaze(height, width);
             await GenerateBlocks(height*width);
@@ -61,6 +60,15 @@ namespace MazeChallenge.Game.Implementations
                 await _unitOfWork.BlockRepository.AddAsync(block);
             }
         }
-	}
+
+        private void ValidateDimensions(int height, int width)
+        {
+            if (height <= 0 || width <= 0)
+            {
+                // Todo: Move this message to a constants file
+                throw new ValidationException("Invalid Dimensions. Both height and width should be greater than 0");
+            }
+        }
+    }
 }
 
