@@ -13,6 +13,7 @@
     <None Remove="Mappers\" />
     <None Remove="Enums\" />
     <None Remove="Context\" />
+    <None Remove="Constants\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -21,6 +22,7 @@
     <Folder Include="Mappers\" />
     <Folder Include="Enums\" />
     <Folder Include="Context\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />

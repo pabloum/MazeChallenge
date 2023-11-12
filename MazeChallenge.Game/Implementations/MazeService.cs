@@ -4,6 +4,7 @@ using MazeChallenge.Domain.Exceptions;
 using MazeChallenge.Persistence.UnitOfWork;
 using MazeChallenge.Domain.Mappers;
 using MazeChallenge.Game.Contracts;
+using MazeChallenge.Domain.Constants;
 
 namespace MazeChallenge.Game.Implementations
 {
@@ -75,8 +76,7 @@ namespace MazeChallenge.Game.Implementations
         {
             if (height <= 0 || width <= 0)
             {
-                // Todo: Move this message to a constants file
-                throw new ValidationException("Invalid Dimensions. Both height and width should be greater than 0");
+                throw new ValidationException(Constants.InvalidDimensions);
             }
         }
     }
