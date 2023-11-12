@@ -34,7 +34,6 @@ namespace MazeChallenge.Domain.Mappers
                 Height = maze.Height,
                 Width = maze.Width,
                 Blocks = maze.Blocks.Select(b => b.MapToBlockDto())
-
             };
         }
 

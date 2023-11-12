@@ -56,9 +56,9 @@ namespace MazeChallenge.Game.Implementations
             return newGame.MapToGameDto();
         }
 
-        public async Task<GameLookDto> TakeALook(Guid mazeUuid, Guid gameUuid)
+        public GameLookDto TakeALook(Guid mazeUuid, Guid gameUuid)
         {
-            var game = await _unitOfWork.GameRepository.FindAsync(gameUuid);
+            var game = _unitOfWork.GameRepository.GetEntity(gameUuid, "CurrentBlock");
 
             if (game == null)
             {

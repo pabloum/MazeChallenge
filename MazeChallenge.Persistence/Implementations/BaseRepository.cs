@@ -3,6 +3,7 @@ using MazeChallenge.Domain.Context;
 using MazeChallenge.Domain.Entities;
 using MazeChallenge.Persistence.Contracts;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MazeChallenge.Persistence.Implementations
 {
@@ -21,6 +22,19 @@ namespace MazeChallenge.Persistence.Implementations
         public virtual async Task<TEntity> FindAsync(Guid id)
         {
             return await _dbSet.FindAsync(id);
+        }
+
+        public virtual TEntity GetEntity(Guid id, string includeProperties = "")
+        {
+            var query = _dbSet.Where(s => s.Uuid == id);
+
+            foreach (var includeProperty in includeProperties.Split(
+               new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return query.FirstOrDefault();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync(

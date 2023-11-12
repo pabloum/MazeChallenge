@@ -35,9 +35,9 @@ namespace MazeChallenge.Game.Implementations
             return maze.MapToMazeCreatedDto();
         }
 
-        public async Task<MazeDto> SeeMaze(Guid mazeUuid)
+        public MazeDto SeeMaze(Guid mazeUuid)
         {
-            var maze = await _unitOfWork.MazeRepository.FindAsync(mazeUuid);
+            var maze = _unitOfWork.MazeRepository.GetEntity(mazeUuid, "Blocks");
 
             if (maze == null)
             {
@@ -61,8 +61,6 @@ namespace MazeChallenge.Game.Implementations
 
         private async Task GenerateBlocks(Maze maze)
         {
-            var mazeSize = maze.Height * maze.Width;
-
             for (var x = 0; x < maze.Width; x++)
             {
                 for (var y = 0; y < maze.Height; y++)
@@ -75,17 +73,24 @@ namespace MazeChallenge.Game.Implementations
 
         private Block GenerateBlock(Guid mazeUuid, int x, int y)
         {
-            // TODO: Strengthen this logic later
+            // TODO: Create logic for defining walls
+            var walls = new Dictionary<int, bool>
+            {
+                { 0, true },
+                { 1, false },
+                { 2, true },
+                { 3, false },
+            };
 
             var block = new Block
             {
                 MazeUuid = mazeUuid,
                 CoordX = x,
                 CoordY = y,
-                NorthBlocked = true,
-                SouthBlocked = false,
-                WestBlocked = true,
-                EastBlocked = false,
+                NorthBlocked = walls[0],
+                SouthBlocked = walls[1],
+                WestBlocked = walls[2],
+                EastBlocked = walls[3],
             };
 
             return block;

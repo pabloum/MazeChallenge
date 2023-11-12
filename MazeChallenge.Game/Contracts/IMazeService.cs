@@ -6,7 +6,7 @@ namespace MazeChallenge.Game.Contracts
 	{
         Task<IEnumerable<MazeDto>> GetAll();
         Task<MazeCreatedDto> CreateNewMaze(int height, int width);
-        Task<MazeDto> SeeMaze(Guid mazeUuid);
+        MazeDto SeeMaze(Guid mazeUuid);
     }
 }
 

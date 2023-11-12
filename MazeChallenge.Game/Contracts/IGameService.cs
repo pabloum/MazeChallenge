@@ -8,7 +8,7 @@ namespace MazeChallenge.Game.Contracts
         Task<IEnumerable<GameDto>> GetAll();
         Task<GameDto> CreateNewGameWithExistingMaze(Guid mazeUuid);
         Task<GameDto> CreateNewGameWithNewMaze();
-        Task<GameLookDto> TakeALook(Guid mazeUuid, Guid gameUuid);
+        GameLookDto TakeALook(Guid mazeUuid, Guid gameUuid);
         Task<GameLookDto> MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation);
     }
 }

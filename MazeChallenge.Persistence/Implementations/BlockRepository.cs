@@ -12,12 +12,12 @@ namespace MazeChallenge.Persistence.Implementations
 
         public Block FindCurrent(Guid mazeUuid)
         {
-            return _dbSet.Where(b => b.MazeUuid == mazeUuid && b.IsCurrent).FirstOrDefault();
+            return _dbSet.FirstOrDefault(b => b.MazeUuid == mazeUuid && b.IsCurrent);
         }
 
         public Block GetInitialBlock(Guid mazeUuid)
         {
-            return _dbSet.Where(b => b.CoordX == 0 && b.CoordY == 0).FirstOrDefault();
+            return _dbSet.FirstOrDefault(b => b.CoordX == 0 && b.CoordY == 0);
         }
     }
 }

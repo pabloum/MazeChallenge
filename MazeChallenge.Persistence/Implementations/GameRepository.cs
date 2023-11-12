@@ -1,6 +1,7 @@
 ﻿using MazeChallenge.Domain.Context;
 using MazeChallenge.Domain.Entities;
 using MazeChallenge.Persistence.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace MazeChallenge.Persistence.Implementations
 {
@@ -9,6 +10,6 @@ namespace MazeChallenge.Persistence.Implementations
 		public GameRepository(MazeDbContext context) : base(context)
 		{
 		}
-	}
+    }
 }
 

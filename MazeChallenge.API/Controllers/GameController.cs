@@ -30,9 +30,9 @@ namespace MazeChallenge.API.Controllers
         }
 
         [HttpGet("{mazeId}/{gameUuid}")]
-        public async Task<IActionResult> TakeALook(Guid mazeId, Guid gameUuid)
+        public IActionResult TakeALook(Guid mazeId, Guid gameUuid)
         {
-            var game = await _gameService.TakeALook(mazeId, gameUuid);
+            var game = _gameService.TakeALook(mazeId, gameUuid);
             return Ok(game);
         }
 

@@ -7,6 +7,7 @@ namespace MazeChallenge.Persistence.Contracts
     where TEntity : BaseEntity
     {
         Task<TEntity> AddAsync(TEntity entity);
+        TEntity GetEntity(Guid id, string includeProperties = "");
         Task<TEntity> FindAsync(Guid id);
         Task<IEnumerable<TEntity>> GetAllAsync(
             Expression<Func<TEntity, bool>> filter = null,
