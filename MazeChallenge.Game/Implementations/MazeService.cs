@@ -20,7 +20,7 @@ namespace MazeChallenge.Game.Implementations
         /// <returns></returns>
         public async Task<IEnumerable<MazeDto>> GetAll()
         {
-            var games = await _unitOfWork.MazeRepository.GetAllAsync();
+            var games = await _unitOfWork.MazeRepository.GetAllAsync(null, null, "Blocks");
             return games.Select(m => m.MapToMazeDto());
         }
 

@@ -22,15 +22,7 @@ namespace MazeChallenge.Domain.Mappers
             return new GameLookDto
             {
                 Game = game.MapToGameDto(),
-                MazeBlockView = new BlockDto
-                {
-                    CoordX = game.CurrentBlock.CoordX,
-                    CoordY = game.CurrentBlock.CoordY,
-                    NorthBlocked = game.CurrentBlock.NorthBlocked,
-                    SouthBlocked = game.CurrentBlock.SouthBlocked,
-                    WestBlocked = game.CurrentBlock.WestBlocked,
-                    EastBlocked = game.CurrentBlock.EastBlocked
-                }
+                MazeBlockView = game.CurrentBlock.MapToBlockDto()
             };
         }
 
@@ -38,7 +30,11 @@ namespace MazeChallenge.Domain.Mappers
         {
             return new MazeDto
             {
-                MazeUuid = maze.Uuid
+                MazeUuid = maze.Uuid,
+                Height = maze.Height,
+                Width = maze.Width,
+                Blocks = maze.Blocks.Select(b => b.MapToBlockDto())
+
             };
         }
 
@@ -49,6 +45,19 @@ namespace MazeChallenge.Domain.Mappers
                 MazeUuid = maze.Uuid,
                 Height = maze.Height,
                 Width = maze.Width
+            };
+        }
+
+        public static BlockDto MapToBlockDto(this Block block)
+        {
+            return new BlockDto
+            {
+                CoordX = block.CoordX,
+                CoordY = block.CoordY,
+                NorthBlocked = block.NorthBlocked,
+                SouthBlocked = block.SouthBlocked,
+                WestBlocked = block.WestBlocked,
+                EastBlocked = block.EastBlocked,
             };
         }
     }

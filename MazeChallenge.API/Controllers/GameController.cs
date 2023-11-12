@@ -50,8 +50,8 @@ namespace MazeChallenge.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var mazes = await _gameService.GetAll();
-            return Ok(mazes);
+            var games = await _gameService.GetAll();
+            return Ok(games);
         }
     }
 }

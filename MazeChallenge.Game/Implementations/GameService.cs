@@ -33,7 +33,7 @@ namespace MazeChallenge.Game.Implementations
         /// <returns></returns>
         public async Task<IEnumerable<GameDto>> GetAll()
         {
-            var games = await _unitOfWork.GameRepository.GetAllAsync();
+            var games = await _unitOfWork.GameRepository.GetAllAsync(null, null, "CurrentBlock");
             return games.Select(g => g.MapToGameDto());
         }
 
@@ -42,7 +42,7 @@ namespace MazeChallenge.Game.Implementations
 		{
             var newGame = CreateNewGame(mazeUuid);
             await _unitOfWork.GameRepository.AddAsync(newGame);
-
+            await _unitOfWork.SaveAsync();
             return newGame.MapToGameDto();
         }
 
@@ -51,6 +51,7 @@ namespace MazeChallenge.Game.Implementations
             var mazeCreatedDto = await _mazeService.CreateNewMaze(25, 25);
             var newGame = CreateNewGame(mazeCreatedDto.MazeUuid);
             await _unitOfWork.GameRepository.AddAsync(newGame);
+            await _unitOfWork.SaveAsync();
 
             return newGame.MapToGameDto();
         }
@@ -85,8 +86,6 @@ namespace MazeChallenge.Game.Implementations
             }
 
             await _unitOfWork.SaveAsync();
-
-
             return game.MapToGameLookDto();
         }
 

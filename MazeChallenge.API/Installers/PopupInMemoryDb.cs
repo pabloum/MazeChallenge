@@ -16,14 +16,12 @@ namespace MazeChallenge.API.Installers
         }
         private async static Task PopulateMazeAndGame(IMazeService mazeService, IGameService gameService)
         {
-            var maze1 = await mazeService.CreateNewMaze(5, 5);
-            var maze2 = await mazeService.CreateNewMaze(15, 14);
-            var maze3 = await mazeService.CreateNewMaze(10, 10);
+            var maze1 = await mazeService.CreateNewMaze(3, 4);
+            var maze2 = await mazeService.CreateNewMaze(2, 2);
 
             await gameService.CreateNewGameWithExistingMaze(maze1.MazeUuid);
             await gameService.CreateNewGameWithExistingMaze(maze1.MazeUuid);
             await gameService.CreateNewGameWithExistingMaze(maze2.MazeUuid);
-            await gameService.CreateNewGameWithExistingMaze(maze3.MazeUuid);
         }
     }
 }
