@@ -3,8 +3,8 @@ namespace MazeChallenge.Domain.Constants
 {
 	public static class Constants
 	{
-		public static string InvalidDimensions = "Invalid Dimensions. Both height and width should be greater than 0";
-
+		public const string InvalidDimensions = "Invalid Dimensions. Both height and width should be greater than 0";
+		public const string InvalidMove = "That move is not possible. Try another move";
     }
 }
 

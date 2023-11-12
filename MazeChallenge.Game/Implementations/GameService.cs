@@ -1,5 +1,8 @@
-﻿using MazeChallenge.Domain.DTO;
+﻿using MazeChallenge.Domain.Constants;
+using MazeChallenge.Domain.DTO;
+using MazeChallenge.Domain.Entities;
 using MazeChallenge.Domain.Enums;
+using MazeChallenge.Domain.Exceptions;
 using MazeChallenge.Domain.Mappers;
 using MazeChallenge.Game.Contracts;
 using MazeChallenge.Persistence.UnitOfWork;
@@ -44,8 +47,6 @@ namespace MazeChallenge.Game.Implementations
         public async Task<GameLookDto> TakeALook(Guid mazeUuid, Guid gameUuid)
         {
             var game = await _unitOfWork.GameRepository.FindAsync(gameUuid);
-            var maze = await _unitOfWork.MazeRepository.FindAsync(mazeUuid);
-
             return game.MapToGameLookDto();
         }
 
@@ -61,16 +62,43 @@ namespace MazeChallenge.Game.Implementations
             }
             else
             {
-                // Todo: Check if it move is possible
+                CheckNextMove(operation, game.CurrentBlock);
+
                 game.CurrentBlock.CoordX += Action[operation].X;
                 game.CurrentBlock.CoordY += Action[operation].Y;
             }
 
+            if (WasMazeCompleted(game))
+            {
+                game.Completed = true;
+            }
+
             await _unitOfWork.SaveAsync();
 
-            // Todo: Check if maze is completed
 
             return game.MapToGameLookDto();
+        }
+
+        private void CheckNextMove(Operation operation, Block block)
+        {
+            var checker = new Dictionary<Operation, bool>
+            {
+                { Operation.GoNorth, block.NorthBlocked },
+                { Operation.GoSouth, block.SouthBlocked },
+                { Operation.GoWest, block.WestBlocked },
+                { Operation.GoEast, block.EastBlocked },
+            };
+
+            if (checker[operation])
+            {
+                throw new ValidationException(Constants.InvalidMove);
+            }
+        }
+
+        private bool WasMazeCompleted(Domain.Entities.Game game)
+        {
+            var currentPosition = game.CurrentBlock;
+            return currentPosition.CoordX == game.Maze.Width && currentPosition.CoordY == game.Maze.Height;
         }
 
         private Domain.Entities.Game CreateNewGame(Guid mazeUuid)
