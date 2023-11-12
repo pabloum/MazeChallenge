@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MazeChallenge.Domain.DTO;
+
 namespace MazeChallenge.Game.Contracts
 {
-	public interface IMazeService : IService
+    public interface IMazeService : IService
 	{
-        Task<Guid> CreateNewMaze(int height, int width);
-        Task SeeMaze(Guid mazeUuid);
+        Task<MazeCreatedDto> CreateNewMaze(int height, int width);
+        Task<MazeDto> SeeMaze(Guid mazeUuid);
     }
 }
 

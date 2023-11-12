@@ -6,7 +6,7 @@ using MazeChallenge.Persistence.UnitOfWork;
 
 namespace MazeChallenge.Game.Implementations
 {
-    public class GameService : BaseService
+    public class GameService : BaseService, IGameService
     {
         private readonly IMazeService _mazeService;
 
@@ -26,7 +26,6 @@ namespace MazeChallenge.Game.Implementations
 
 		public async Task<GameDto> CreateNewGameWithExistingMaze(Guid mazeUuid)
 		{
-            var maze = await _unitOfWork.MazeRepository.FindAsync(mazeUuid);
             var newGame = CreateNewGame(mazeUuid);
             await _unitOfWork.GameRepository.AddAsync(newGame);
 
@@ -35,50 +34,55 @@ namespace MazeChallenge.Game.Implementations
 
         public async Task<GameDto> CreateNewGameWithNewMaze()
         {
-            var mazeUuid = await _mazeService.CreateNewMaze(25, 25);
-            var newGame = CreateNewGame(mazeUuid);
+            var mazeCreatedDto = await _mazeService.CreateNewMaze(25, 25);
+            var newGame = CreateNewGame(mazeCreatedDto.MazeUuid);
             await _unitOfWork.GameRepository.AddAsync(newGame);
 
             return newGame.MapToGameDto();
         }
 
-        public async Task<GameDto> TakeALook(Guid mazeUuid, Guid gameUuid)
+        public async Task<GameLookDto> TakeALook(Guid mazeUuid, Guid gameUuid)
         {
             var game = await _unitOfWork.GameRepository.FindAsync(gameUuid);
             var maze = await _unitOfWork.MazeRepository.FindAsync(mazeUuid);
 
-            return game.MapToGameDto();
+            return game.MapToGameLookDto();
         }
 
-        public async Task<GameDto> MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation)
+        public async Task<GameLookDto> MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation)
         {
             var game = await _unitOfWork.GameRepository.FindAsync(gameUuid);
             var maze = await _unitOfWork.MazeRepository.FindAsync(mazeUuid);
 
             if (operation == Operation.Start)
             {
-                game.CurrentPositionX = 0;
-                game.CurrentPositionY = 0;
+                game.CurrentBlock.CoordX = 0;
+                game.CurrentBlock.CoordY = 0;
             }
             else
             {
-                game.CurrentPositionX += Action[operation].X;
-                game.CurrentPositionY += Action[operation].Y;
+                // Todo: Check if it move is possible
+                game.CurrentBlock.CoordX += Action[operation].X;
+                game.CurrentBlock.CoordY += Action[operation].Y;
             }
 
             await _unitOfWork.SaveAsync();
 
-            return game.MapToGameDto();
+            // Todo: Check if maze is completed
+
+            return game.MapToGameLookDto();
         }
 
         private Domain.Entities.Game CreateNewGame(Guid mazeUuid)
         {
+            var initialBlock = _unitOfWork.BlockRepository.GetInitialBlock(mazeUuid);
+
             return new Domain.Entities.Game
             {
                 MazeUuid = mazeUuid,
                 Completed = false,
-                CurrentPositionX = 0,
-                CurrentPositionY = 0,
+                CurrentBlockUuid = initialBlock.Uuid,
+                CurrentBlock = initialBlock
             };
         }
     }

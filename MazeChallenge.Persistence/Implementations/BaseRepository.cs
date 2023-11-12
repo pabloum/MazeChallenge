@@ -50,9 +50,10 @@ namespace MazeChallenge.Persistence.Implementations
             }
         }
 
-        public virtual async Task AddAsync(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
+            var createdEntity = await _dbSet.AddAsync(entity);
+            return createdEntity.Entity;
         }
 
         public virtual async Task Delete(TEntity entity)

@@ -7,8 +7,8 @@ namespace MazeChallenge.Game.Contracts
     {
         Task<GameDto> CreateNewGameWithExistingMaze(Guid mazeUuid);
         Task<GameDto> CreateNewGameWithNewMaze();
-        Task<GameDto> TakeALook(Guid mazeUuid, Guid gameUuid);
-        Task<GameDto> MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation);
+        Task<GameLookDto> TakeALook(Guid mazeUuid, Guid gameUuid);
+        Task<GameLookDto> MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation);
     }
 }
 

@@ -6,7 +6,7 @@ namespace MazeChallenge.Persistence.Contracts
 	public interface IBaseRepository<TEntity>
     where TEntity : BaseEntity
     {
-        Task AddAsync(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
         Task<TEntity> FindAsync(Guid id);
         Task<IEnumerable<TEntity>> GetAllAsync(
             Expression<Func<TEntity, bool>> filter = null,

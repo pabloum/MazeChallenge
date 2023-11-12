@@ -3,24 +3,25 @@ using MazeChallenge.Domain.Entities;
 using MazeChallenge.Domain.Exceptions;
 using MazeChallenge.Persistence.UnitOfWork;
 using MazeChallenge.Domain.Mappers;
+using MazeChallenge.Game.Contracts;
 
 namespace MazeChallenge.Game.Implementations
 {
-    public class MazeService : BaseService
+    public class MazeService : BaseService, IMazeService
     {
 		public MazeService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
 		}
 
-        public async Task<Guid> CreateNewMaze(int height, int width)
+        public async Task<MazeCreatedDto> CreateNewMaze(int height, int width)
         {
             ValidateDimensions(height, width);
 
-            var mazeUuid = await GenerateMaze(height, width);
-            await GenerateBlocks(height*width);
+            var maze = await GenerateMaze(height, width);
+            await GenerateBlocks(maze);
             await _unitOfWork.SaveAsync();
 
-            return mazeUuid;
+            return maze.MapToMazeCreatedDto();
         }
 
         public async Task<MazeDto> SeeMaze(Guid mazeUuid)
@@ -29,7 +30,7 @@ namespace MazeChallenge.Game.Implementations
             return maze.MapToMazeDto();
         }
 
-        private async Task<Guid> GenerateMaze(int height, int width)
+        private async Task<Maze> GenerateMaze(int height, int width)
         {
             var maze = new Maze
             {
@@ -37,29 +38,37 @@ namespace MazeChallenge.Game.Implementations
                 Width = width,
             };
 
-            await _unitOfWork.MazeRepository.AddAsync(maze);
-            return Guid.Empty;
+            var createdMaze = await _unitOfWork.MazeRepository.AddAsync(maze);
+            return createdMaze;
         }
 
-        private async Task GenerateBlocks(int mazeSize)
+        private async Task GenerateBlocks(Maze maze)
+        {
+            var mazeSize = maze.Height * maze.Width;
+            
+            for (var cell = 0; cell < mazeSize; cell++)
+            {
+                var block = GenerateBlock(maze.Uuid);
+                await _unitOfWork.BlockRepository.AddAsync(block);
+            }
+        }
+
+        private Block GenerateBlock(Guid mazeUuid)
         {
             // TODO: Strengthen this logic later
 
-            for (var cell = 0; cell < mazeSize; cell++)
+            var block = new Block
             {
-                var block = new Block
-                {
-                    CoordX = 0,
-                    CoordY = 0,
-                    NorthBlocked = true,
-                    SouthBlocked = false,
-                    WestBlocked = true,
-                    EastBlocked = false,
-                    //MazeUuid = 
-                };
+                MazeUuid = mazeUuid,
+                CoordX = 0,
+                CoordY = 0,
+                NorthBlocked = true,
+                SouthBlocked = false,
+                WestBlocked = true,
+                EastBlocked = false,
+            };
 
-                await _unitOfWork.BlockRepository.AddAsync(block);
-            }
+            return block;
         }
 
         private void ValidateDimensions(int height, int width)
