@@ -59,6 +59,12 @@ namespace MazeChallenge.Game.Implementations
         public async Task<GameLookDto> TakeALook(Guid mazeUuid, Guid gameUuid)
         {
             var game = await _unitOfWork.GameRepository.FindAsync(gameUuid);
+
+            if (game == null)
+            {
+                throw new ValidationException(Constants.InvalidGameUid);
+            }
+
             return game.MapToGameLookDto();
         }
 

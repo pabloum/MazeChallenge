@@ -38,6 +38,12 @@ namespace MazeChallenge.Game.Implementations
         public async Task<MazeDto> SeeMaze(Guid mazeUuid)
         {
             var maze = await _unitOfWork.MazeRepository.FindAsync(mazeUuid);
+
+            if (maze == null)
+            {
+                throw new ValidationException(Constants.InvalidMazeUid);
+            }
+
             return maze.MapToMazeDto();
         }
 
