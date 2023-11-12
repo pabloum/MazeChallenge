@@ -17,29 +17,29 @@ namespace MazeChallenge.API.Controllers
 		[HttpPost("{mazeId}")]
 		public async Task<IActionResult> CreateGame(Guid mazeId)
 		{
-			await _gameService.CreateNewGameWithExistingMaze(mazeId);
-            return Ok();
+            var game = await _gameService.CreateNewGameWithExistingMaze(mazeId);
+            return Ok(game);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateGame()
         {
-            await _gameService.CreateNewGameWithNewMaze();
-            return Ok();
+            var game = await _gameService.CreateNewGameWithNewMaze();
+            return Ok(game);
         }
 
         [HttpGet("{mazeId}/{gameUuid}")]
         public async Task<IActionResult> TakeALook(Guid mazeId, Guid gameUuid)
         {
-            await _gameService.TakeALook(mazeId, gameUuid);
-            return Ok();
+            var game = await _gameService.TakeALook(mazeId, gameUuid);
+            return Ok(game);
         }
 
         [HttpPost("{mazeId}/{gameUuid}")]
         public async Task<IActionResult> MoveNextCell(Guid mazeId, Guid gameUuid, [FromBody]Operation operation)
         {
-            await _gameService.MoveNextCell(mazeId, gameUuid, operation);
-            return Ok();
+            var game = await _gameService.MoveNextCell(mazeId, gameUuid, operation);
+            return Ok(game);
         }
     }
 }

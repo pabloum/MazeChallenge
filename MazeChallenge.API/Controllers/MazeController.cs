@@ -16,15 +16,15 @@ namespace MazeChallenge.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMaze(int height = 25, int width = 25)
         {
-            await _mazeService.CreateNewMaze(height, width);
-            return Ok();
+            var maze = await _mazeService.CreateNewMaze(height, width);
+            return Ok(maze);
         }
 
         [HttpGet]
         public async Task<IActionResult> SeeMaze(Guid mazeUuid)
         {
-            await _mazeService.SeeMaze(mazeUuid);
-            return Ok();
+            var maze = await _mazeService.SeeMaze(mazeUuid);
+            return Ok(maze);
         }
     }
 }
