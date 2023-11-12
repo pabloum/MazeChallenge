@@ -56,23 +56,26 @@ namespace MazeChallenge.Game.Implementations
         private async Task GenerateBlocks(Maze maze)
         {
             var mazeSize = maze.Height * maze.Width;
-            
-            for (var cell = 0; cell < mazeSize; cell++)
+
+            for (var x = 0; x < maze.Width; x++)
             {
-                var block = GenerateBlock(maze.Uuid);
-                await _unitOfWork.BlockRepository.AddAsync(block);
+                for (var y = 0; y < maze.Height; y++)
+                {
+                    var block = GenerateBlock(maze.Uuid, x, y);
+                    await _unitOfWork.BlockRepository.AddAsync(block);
+                }
             }
         }
 
-        private Block GenerateBlock(Guid mazeUuid)
+        private Block GenerateBlock(Guid mazeUuid, int x, int y)
         {
             // TODO: Strengthen this logic later
 
             var block = new Block
             {
                 MazeUuid = mazeUuid,
-                CoordX = 0,
-                CoordY = 0,
+                CoordX = x,
+                CoordY = y,
                 NorthBlocked = true,
                 SouthBlocked = false,
                 WestBlocked = true,
