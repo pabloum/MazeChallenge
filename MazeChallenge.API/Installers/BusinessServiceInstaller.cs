@@ -26,7 +26,7 @@ namespace MazeChallenge.API.Installers
             if (configuration.GetValue<bool>("UseDataBase"))
             {
                 services.AddDbContext<MazeDbContext>(options =>
-                    options.UseSqlServer(configuration.GetValue<string>("ConnectionStrings:HotelBookinDatabase")));
+                    options.UseSqlServer(configuration.GetValue<string>("ConnectionStrings:MazeChallengeDb")));
                 using (var context = services.BuildServiceProvider().GetRequiredService<MazeDbContext>())
                 {
                     context.Database.EnsureCreated();
