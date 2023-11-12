@@ -1,6 +1,7 @@
 ﻿using System;
 using MazeChallenge.Domain.Enums;
 using MazeChallenge.Game.Contracts;
+using MazeChallenge.Game.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MazeChallenge.API.Controllers
@@ -40,6 +41,17 @@ namespace MazeChallenge.API.Controllers
         {
             var game = await _gameService.MoveNextCell(mazeId, gameUuid, operation);
             return Ok(game);
+        }
+
+        /// <summary>
+        /// This was just for testing purposes
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var mazes = await _gameService.GetAll();
+            return Ok(mazes);
         }
     }
 }

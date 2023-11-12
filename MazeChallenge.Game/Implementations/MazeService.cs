@@ -14,6 +14,16 @@ namespace MazeChallenge.Game.Implementations
         {
 		}
 
+        /// <summary>
+        /// This method is for testing purposes
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<MazeDto>> GetAll()
+        {
+            var games = await _unitOfWork.MazeRepository.GetAllAsync();
+            return games.Select(m => m.MapToMazeDto());
+        }
+
         public async Task<MazeCreatedDto> CreateNewMaze(int height, int width)
         {
             ValidateDimensions(height, width);

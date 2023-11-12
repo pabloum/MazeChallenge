@@ -27,7 +27,18 @@ namespace MazeChallenge.Game.Implementations
             _mazeService = mazeService;
         }
 
-		public async Task<GameDto> CreateNewGameWithExistingMaze(Guid mazeUuid)
+        /// <summary>
+        /// This method is for testing purposes
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<GameDto>> GetAll()
+        {
+            var games = await _unitOfWork.GameRepository.GetAllAsync();
+            return games.Select(g => g.MapToGameDto());
+        }
+
+
+        public async Task<GameDto> CreateNewGameWithExistingMaze(Guid mazeUuid)
 		{
             var newGame = CreateNewGame(mazeUuid);
             await _unitOfWork.GameRepository.AddAsync(newGame);

@@ -5,6 +5,7 @@ namespace MazeChallenge.Game.Contracts
 {
     public interface IGameService : IService
     {
+        Task<IEnumerable<GameDto>> GetAll();
         Task<GameDto> CreateNewGameWithExistingMaze(Guid mazeUuid);
         Task<GameDto> CreateNewGameWithNewMaze();
         Task<GameLookDto> TakeALook(Guid mazeUuid, Guid gameUuid);

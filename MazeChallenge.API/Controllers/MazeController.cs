@@ -20,11 +20,22 @@ namespace MazeChallenge.API.Controllers
             return Ok(maze);
         }
 
-        [HttpGet]
+        [HttpGet("{mazeUuid}")]
         public async Task<IActionResult> SeeMaze(Guid mazeUuid)
         {
             var maze = await _mazeService.SeeMaze(mazeUuid);
             return Ok(maze);
+        }
+
+        /// <summary>
+        /// This was just for testing purposes
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var mazes = await _mazeService.GetAll();
+            return Ok(mazes);
         }
     }
 }
