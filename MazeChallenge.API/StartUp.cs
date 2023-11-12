@@ -1,10 +1,9 @@
-﻿using System;
-using MazeChallenge.API.Installers;
+﻿using MazeChallenge.API.Installers;
 using MazeChallenge.API.Middleware;
 
 namespace MazeChallenge.API
 {
-	public class StartUp
+    public class StartUp
 	{
         public IConfiguration configRoot { get; }
 
@@ -20,7 +19,7 @@ namespace MazeChallenge.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Hotels Reservations API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Maze Challenge API", Version = "v1" });
             });
 
             services.AddBusinessServices(configRoot);

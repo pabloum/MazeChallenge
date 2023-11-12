@@ -1,14 +1,14 @@
-﻿using MazeChallenge.Domain.Enums;
+﻿using MazeChallenge.Domain.DTO;
+using MazeChallenge.Domain.Enums;
 
 namespace MazeChallenge.Game.Contracts
 {
     public interface IGameService : IService
     {
-        Task CreateNewGameWithExistingMaze(Guid mazeUuid);
-        Task CreateNewGameWithNewMaze();
-        Task TakeALook(Guid mazeUuid, Guid gameUuid);
-        Task MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation);
-        Task ResetGame(Guid mazeUuid, Guid gameUuid);
+        Task<GameDto> CreateNewGameWithExistingMaze(Guid mazeUuid);
+        Task<GameDto> CreateNewGameWithNewMaze();
+        Task<GameDto> TakeALook(Guid mazeUuid, Guid gameUuid);
+        Task<GameDto> MoveNextCell(Guid mazeUuid, Guid gameUuid, Operation operation);
     }
 }
 

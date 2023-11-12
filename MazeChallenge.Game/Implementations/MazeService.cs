@@ -12,13 +12,15 @@ namespace MazeChallenge.Game.Implementations
         {
 		}
 
-        public async Task CreateNewMaze(int height, int width)
+        public async Task<Guid> CreateNewMaze(int height, int width)
         {
             ValidateDimensions(height, width);
 
-            await GenerateMaze(height, width);
+            var mazeUuid = await GenerateMaze(height, width);
             await GenerateBlocks(height*width);
             await _unitOfWork.SaveAsync();
+
+            return mazeUuid;
         }
 
         public async Task<MazeDto> SeeMaze(Guid mazeUuid)
@@ -27,16 +29,16 @@ namespace MazeChallenge.Game.Implementations
             return maze.MapToMazeDto();
         }
 
-        private async Task GenerateMaze(int height, int width)
+        private async Task<Guid> GenerateMaze(int height, int width)
         {
             var maze = new Maze
             {
-                //Uuid = 
                 Height = height,
                 Width = width,
             };
 
             await _unitOfWork.MazeRepository.AddAsync(maze);
+            return Guid.Empty;
         }
 
         private async Task GenerateBlocks(int mazeSize)
@@ -47,7 +49,6 @@ namespace MazeChallenge.Game.Implementations
             {
                 var block = new Block
                 {
-                    //Uuid = 
                     CoordX = 0,
                     CoordY = 0,
                     NorthBlocked = true,
